@@ -1,5 +1,5 @@
-# EDICEM-CIR-API
-EDICEM's project management API
+# EDYCEM-CIR-API
+EDYCEM's project management API
 ## Initialize project
 
 Create your own config-dev.json base on the config.json.example
