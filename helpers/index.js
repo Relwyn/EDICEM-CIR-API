@@ -8,12 +8,13 @@ module.exports = app => {
     return (data) ? data : Promise.reject();
   }
 
-  function reject(code, name, message) {
+  function reject(code, name, message, error) {
     return () => {
       return Promise.reject({
         code: code,
         name: name,
-        message: message
+        message: message,
+        error: error
       });
     };
   }

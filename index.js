@@ -5,13 +5,13 @@ const app = express();
 
 
 // Loading applicatin stack
-require('./config')(app); console.log("Loading config ...");
-require('./boot')(app); app.logger.info("Booting application ...");
-require('./helpers')(app);  app.logger.info("Loading helpers ...");
-require('./models')(app); app.logger.info("Loading models ...");
-require('./middlewares')(app);  app.logger.info("Loading middlewares ...");
-require('./actions')(app);  app.logger.info("Loading actions ...");
-require('./routes')(app); app.logger.info("Loading routes ...");
+require("./boot/index.js")(app); app.logger.info("Loading Boot");
+require("./config/index.js")(app);app.logger.info("Loading config");
+require("./models/index.js")(app);app.logger.info("Loading models");
+require("./helpers/index.js")(app);app.logger.info("Loading helpers");
+require("./middlewares/index.js")(app);app.logger.info("Loading middlewares");
+require("./actions/index.js")(app);app.logger.info("Loading actions");
+require("./routes/index.js")(app);app.logger.info("Loading routes");
 
 app.logger.info(`App listening on http://localhost:${app.config.port}`);
 app.listen(app.config.port);
