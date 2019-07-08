@@ -4,7 +4,7 @@ module.exports = app => {
       read,
       create
     };
-  
+
     /**
      * [Some action]
      * @param  {object}   req  Expresss request
@@ -12,9 +12,11 @@ module.exports = app => {
      * @param  {Function} next Next middleware
      * @return {Promise}       returned Promise
      */
-  
+
     function read(req, res, next) {
-      return res.success({});
+      return Project.findAll().then(projects => {
+        return res.success(projects);
+      })
     }
 
     function create(req, res, next) {

@@ -1,6 +1,7 @@
 const {createLogger, format, transports} = require('winston');
 const {combine, timestamp, label, printf} = format;
 const chalk = require('chalk');
+const cors = require('cors');
 
 const package = require(`${__dirname}/../package.json`);
 const bodyParser = require('body-parser');
@@ -15,6 +16,10 @@ const consoleFormat = printf(({level, message, label, timestamp}) => levels[leve
 
 module.exports = app => {
   const appName = package.name;
+
+  // enable cors
+  app.use(cors({origin: app.config.cors}));
+
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }))
 
