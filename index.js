@@ -5,8 +5,8 @@ const app = express();
 
 
 // Loading applicatin stack
+require("./config/index.js")(app);console.log("Loading config");
 require("./boot/index.js")(app); app.logger.info("Loading Boot");
-require("./config/index.js")(app);app.logger.info("Loading config");
 require("./models/index.js")(app);app.logger.info("Loading models");
 require("./helpers/index.js")(app);app.logger.info("Loading helpers");
 require("./middlewares/index.js")(app);app.logger.info("Loading middlewares");
