@@ -9,7 +9,7 @@ module.exports = (app, Sequelize) => {
         AllowNull: false,
       },
       request: {
-        type: Sequelize.TEXT(1000),
+        type: Sequelize.TEXT(),
         AllowNull: false, 
       },
       date: {

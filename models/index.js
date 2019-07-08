@@ -70,7 +70,7 @@ module.exports = app => {
         foreignKey: 'user_id'
       });
       app.models.Historic.belongsToMany(app.models.User, {
-        as: 'User',
+        as: 'Historic_User',
         through: 'User_Historic',
         foreignKey: 'historic_id'
       });
@@ -79,6 +79,14 @@ module.exports = app => {
     app.sequelize.sync({force: app.config.database.option.force})
       .then(async () => {
         //Default data
+        app.models.Project.findOrCreate({
+          where: {
+            label: req.body.label,
+            description: req.body.description,
+            start: req.body.start,
+            end: req.body.end
+          }
+        });
       })
       .catch(error => {
         app.logger.error("Cannot connect to the database", error)
