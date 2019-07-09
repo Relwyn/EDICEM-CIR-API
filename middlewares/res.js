@@ -10,8 +10,7 @@ module.exports = (req, res, next) => {
     if (!error.code) {
       return res.status(500).send({ name: "error", message: error.toString() });
     }
-    const {code, name, message} = error;
-    return res.status(code).send({ name: name, message: message || "" });
+    return res.status(error.code).send({ name: error.name, message: error.message, error: error.error || "" });
   };
 
   next();

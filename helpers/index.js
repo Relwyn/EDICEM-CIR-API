@@ -9,7 +9,6 @@ module.exports = app => {
   }
 
   function reject(code, name, message, error) {
-    return () => {
       return Promise.reject({
         code: code,
         name: name,
@@ -17,5 +16,4 @@ module.exports = app => {
         error: error
       });
     };
-  }
 };
