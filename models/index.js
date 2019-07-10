@@ -62,7 +62,7 @@ module.exports = app => {
         as: 'User',
         through: 'User_Project',
         foreignKey: 'project_id'});
-      
+
       // Link User to Historic
       app.models.User.belongsToMany(app.models.Historic, {
         as: 'Historic',
@@ -81,10 +81,15 @@ module.exports = app => {
         //Default data
         app.models.Project.findOrCreate({
           where: {
-            label: req.body.label,
-            description: req.body.description,
-            start: req.body.start,
-            end: req.body.end
+            label: "Edycem",
+            description: "Outil horaire salarie",
+            start: "2019-06-01",
+            end: "2019-12-01"
+          }
+        });
+        app.models.Role.findOrCreate({
+          where: {
+            label: "Admin"
           }
         });
       })

@@ -5,6 +5,8 @@ module.exports = (app) => {
 
   router.post('/',
   app.actions.user.create);
+  router.put('/:id',
+    app.actions.user.update);
 
   return router
 };

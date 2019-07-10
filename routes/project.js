@@ -5,8 +5,7 @@ module.exports = (app) => {
 
   router.get('/',
   app.actions.project.read);
-
-  router.post('/', 
+  router.post('/',
   app.actions.project.create);
 
   return router
