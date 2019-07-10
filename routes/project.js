@@ -7,6 +7,8 @@ module.exports = (app) => {
   app.actions.project.read);
   router.post('/',
   app.actions.project.create);
+  router.put('/:id',
+  app.actions.project.update);
 
   return router
 };
