@@ -28,7 +28,6 @@ module.exports = app => {
 						if(err) return app.helpers.reject(400, "User", "IncorrectCredentials", err)
 						return isMatch;
 					});
-					console.log("same : " + samePassword);
 					if (samePassword){
 						return user;
 					}

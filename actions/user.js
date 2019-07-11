@@ -2,7 +2,8 @@ module.exports = app => {
 	const bcrypt = require('bcrypt');
   const User = app.models.User;
   return {
-    create,
+		create,
+		read,
     update
   };
 
@@ -13,6 +14,26 @@ module.exports = app => {
    * @param  {Function} next Next middleware
    * @return {Promise}       returned Promise
    */
+
+	function read(req, res, next) {
+		let offset = (req.query.page - 1) * req.query.limit;
+		return User.findAndCountAll({
+			limit: Number(req.query.limit),
+			offset: offset,
+			order: [
+				['updatedAt', 'DESC'],
+			],
+		})
+		.catch(error => {
+			return app.helpers.reject(404, "User", "ErrorUserNotFound", error)
+		})
+		.then(result => {
+			res.json(result);
+		})
+		.catch(error => {
+			res.error(error)
+		});
+	}
 
   function create(req, res, next) {
 		return bcrypt.hash(req.body.password,10)

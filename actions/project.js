@@ -16,8 +16,6 @@ module.exports = app => {
 
     function read(req, res, next) {
       let offset = (req.query.page - 1) * req.query.limit;
-      console.log(req.query.limit);
-      console.log(offset);
       return Project.findAndCountAll({
         limit: Number(req.query.limit),
         offset: offset,
@@ -26,7 +24,7 @@ module.exports = app => {
         ],
       })
       .catch(error => {
-        return app.helpers.reject(404, "Project", "ErrorWhileSearchingProject", error)
+        return app.helpers.reject(404, "Project", "ErrorProjectNotFound", error)
       })
       .then(result => {
         res.json(result);
