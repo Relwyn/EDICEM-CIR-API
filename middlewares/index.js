@@ -2,6 +2,7 @@ module.exports = app => {
   app.use(require('./res'));
   app.middlewares = {
     bodyParser: require('body-parser'),
-    ensureFields: require('./ensureFields')
+    ensureFields: require('./ensureFields'),
+    ensureAuthenticated: require('./ensureAuthenticated')
   };
 };

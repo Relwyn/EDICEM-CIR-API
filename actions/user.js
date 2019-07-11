@@ -1,4 +1,5 @@
 module.exports = app => {
+	const bcrypt = require('bcrypt');
   const User = app.models.User;
   return {
     create,
@@ -14,15 +15,19 @@ module.exports = app => {
    */
 
   function create(req, res, next) {
-    return User.create({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      phone_id: req.body.phone_id,
-      phone_number: req.body.phone_number,
-      role_id : req.body.role_id || 1,
-      email: req.body.email,
-      password: req.body.password,
-    }).then(app.helpers.ensureOne)
+		return bcrypt.hash(req.body.password,10)
+		.then(password => {
+			return User.create({
+				first_name: req.body.first_name,
+				last_name: req.body.last_name,
+				phone_id: req.body.phone_id,
+				phone_number: req.body.phone_number,
+				role_id : req.body.role_id || 1,
+				email: req.body.email,
+				password: password,
+			})
+		})
+    .then(app.helpers.ensureOne)
       .catch(error => {
         return app.helpers.reject(400, "User", "ErrorWhileCreatingUser", error)
       })
