@@ -15,9 +15,25 @@ module.exports = app => {
      */
 
     function read(req, res, next) {
-      return Project.findAll().then(projects => {
-        return res.success(projects);
+      let offset = (req.query.page - 1) * req.query.limit;
+      console.log(req.query.limit);
+      console.log(offset);
+      return Project.findAndCountAll({
+        limit: Number(req.query.limit),
+        offset: offset,
+        order: [
+          ['updatedAt', 'DESC'],
+        ],
       })
+      .catch(error => {
+        return app.helpers.reject(404, "Project", "ErrorWhileSearchingProject", error)
+      })
+      .then(result => {
+        res.json(result);
+      })
+      .catch(error => {
+        res.error(error)
+      });
     }
 
     function create(req, res, next) {
@@ -35,7 +51,7 @@ module.exports = app => {
         })
         .catch(error => {
           res.error(error)
-        })
+        });
     }
 
     function update(req, res, next) {
@@ -54,6 +70,6 @@ module.exports = app => {
         })
         .catch(error => {
           res.error(error)
-        })
+        });
     }
   };
